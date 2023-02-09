@@ -1,9 +1,11 @@
 package com.api.upload.controller;
 
+import com.api.upload.model.FileDB;
 import com.api.upload.model.Menssage;
 import com.api.upload.model.ResponseFile;
 import com.api.upload.service.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,19 @@ public class FileController {
                     .path(dbFile.getId())
                     .toUriString();
 
-            return new ResponseFile(dbFile.getName(),fileDownloadUrl, dbFile.getType(),dbFile.getData().length);
+            return new ResponseFile(dbFile.getId(), dbFile.getName(),fileDownloadUrl, dbFile.getType(),dbFile.getData().length);
         }).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(files);
+    }
+
+    @GetMapping("/files/{id}")
+    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+        FileDB fileDB = service.getFile(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
     }
 
     @PostMapping("/upload")

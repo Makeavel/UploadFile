@@ -10,10 +10,10 @@ import javax.persistence.*;
 //https://www.bezkoder.com/spring-boot-upload-file-database/
 
 @Data
-@Entity
-@Table(name = "files")
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "files")
 public class FileDB {
 
     @Id
