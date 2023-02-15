@@ -19,4 +19,8 @@ public class Generic {
     private UUID id;
 
     private String name;
+    
+    @ManyToOne
+    @JoinColumn(name = "file_id")
+    private FileDB file;
 }
