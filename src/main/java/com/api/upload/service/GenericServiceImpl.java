@@ -24,7 +24,7 @@ public class GenericServiceImpl implements GenericService{
         try {
             entityGeneric = objectMapper.readValue(generic, Generic.class);
             fileDb.setId(id);
-            entityGeneric.setId(fileDb.getId());
+            entityGeneric.setFile(fileDb);
             return genericRepository.save(entityGeneric);
 
         } catch (Exception ex) {
