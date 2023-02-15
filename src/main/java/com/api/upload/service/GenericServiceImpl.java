@@ -32,4 +32,9 @@ public class GenericServiceImpl implements GenericService{
             return null;
         }
     }
+    
+    @Override
+    public List<Generic> getReadAll() {
+        return genericRepository.findAll();
+    }
 }
