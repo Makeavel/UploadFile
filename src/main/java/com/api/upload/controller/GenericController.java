@@ -22,8 +22,8 @@ public class GenericController {
     private final GenericService genericService;
 
     @PostMapping("/create")
-    public ResponseEntity<Menssage> uploadAll(@RequestParam MultipartFile file ,
-                                              @RequestParam String generic) throws Exception{
+    public ResponseEntity<Menssage> uploadAll(@RequestParam("file") MultipartFile file ,
+                                              @RequestParam("generic") String generic) throws Exception{
 
         FileDB fileDB;
         String message = "";
