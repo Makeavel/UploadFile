@@ -21,6 +21,8 @@ public class GenericController {
     private final FileService fileService;
     private final GenericService genericService;
 
+    // -------------------------- CREATE + FILE ---------------
+    
     @PostMapping("/create")
     public ResponseEntity<Menssage> uploadAll(@RequestParam("file") MultipartFile file ,
                                               @RequestParam("generic") String generic) throws Exception{
@@ -42,5 +44,12 @@ public class GenericController {
             message = "[ERROR] upload não realizado" ;
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new Menssage(message));
         }
+    }
+    
+     // -------------------------- READ ---------------
+
+    @GetMapping("/readAll")
+    public List<Generic> readAll(){
+        return genericService.getReadAll();
     }
 }
