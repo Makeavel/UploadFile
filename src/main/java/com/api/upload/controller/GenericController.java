@@ -40,7 +40,7 @@ public class GenericController {
 
         }catch (Exception ex){
             message = "[ERROR] upload não realizado" ;
-            return ResponseEntity.status(HttpStatus.OK).body(new Menssage(message));
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new Menssage(message));
         }
     }
 }
