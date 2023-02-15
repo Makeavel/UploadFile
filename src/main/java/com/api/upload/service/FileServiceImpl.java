@@ -29,7 +29,7 @@ public class FileServiceImpl implements FileService{
 
     @Override
     public FileDB getFile(UUID id) {
-        return repository.findById(id.toString()).get();
+        return repository.findById(id).get();
     }
 
     @Override
