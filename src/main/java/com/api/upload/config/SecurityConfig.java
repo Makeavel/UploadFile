@@ -19,7 +19,9 @@ public class SecurityConfig {
                 //----------- files
                 .antMatchers("/api/file/**")
                 .permitAll()
-
+                //------------ generic
+                .antMatchers("api/generic/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

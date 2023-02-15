@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
-//https://www.bezkoder.com/spring-boot-upload-file-database/
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -17,9 +16,8 @@ import javax.persistence.*;
 public class FileDB {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private String name;
 

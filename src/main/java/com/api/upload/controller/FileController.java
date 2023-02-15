@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,18 +28,18 @@ public class FileController {
         List<ResponseFile> files = service.getAllFiles().map(dbFile -> {
             String fileDownloadUrl = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
-                    .path(dbFile.getId())
+                    .path("/api/file/")
+                    .path(dbFile.getId().toString())
                     .toUriString();
 
-            return new ResponseFile(dbFile.getId(), dbFile.getName(),fileDownloadUrl, dbFile.getType(),dbFile.getData().length);
+            return new ResponseFile(dbFile.getId().toString(), dbFile.getName(),fileDownloadUrl, dbFile.getType(),dbFile.getData().length);
         }).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
     @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+    public ResponseEntity<byte[]> getFile(@PathVariable UUID id) {
         FileDB fileDB = service.getFile(id);
 
         return ResponseEntity.ok()
