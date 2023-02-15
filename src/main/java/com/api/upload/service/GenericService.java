@@ -8,4 +8,6 @@ public interface GenericService {
 
 
     Generic setService(String generic, UUID id);
+    
+    List<Generic> getReadAll();
 }
