@@ -1,0 +1,14 @@
+package com.api.upload.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Menssage {
+
+    private String message;
+
+}
