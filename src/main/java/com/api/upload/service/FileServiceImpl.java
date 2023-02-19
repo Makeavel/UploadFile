@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -53,8 +54,8 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
-    public Stream<FileDB> getAllFiles() {
-        return repository.findAll().stream();
+    public List<FileDB> getAllFiles() {
+        return repository.findAll();
     }
 
 }

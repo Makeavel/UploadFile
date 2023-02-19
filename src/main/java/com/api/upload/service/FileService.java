@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -17,5 +18,5 @@ public interface FileService {
 
     InputStream decoderString(FileDB file) throws IOException;
 
-    public Stream<FileDB> getAllFiles();
+    List<FileDB> getAllFiles();
 }

@@ -30,32 +30,16 @@ public class FileController {
     private final FileService service;
 
     @GetMapping("/files")
-    public ResponseEntity<List<ResponseFile>> getListFiles(){
-        List<ResponseFile> files = service.getAllFiles().map(dbFile -> {
-            String fileDownloadUrl = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/api/file/")
-                    .path(dbFile.getId().toString())
-                    .toUriString();
-
-            return new ResponseFile(dbFile.getId().toString(), dbFile.getName(),fileDownloadUrl, dbFile.getType(),dbFile.getBase64());
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<FileDB>> getListFiles(){
+        List<FileDB> files = service.getAllFiles();
 
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
     @GetMapping("/files/{id}")
-    public ResponseEntity<InputStream> getFile(@PathVariable UUID id , HttpServletResponse response) throws IOException {
-
+    public ResponseEntity<FileDB> getFile(@PathVariable UUID id) throws IOException {
         FileDB fileDB = service.getFile(id);
-        var is = service.decoderString(fileDB);
-        IOUtils.copy(is , response.getOutputStream());
-        response.flushBuffer();
-       // return ResponseEntity.ok()
-        //        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-        //        .body(service.decoderString(fileDB));
-
-        return null;
+        return ResponseEntity.ok().body(fileDB);
     }
 
     @PostMapping("/upload")
